@@ -40,16 +40,16 @@ def health():
         raise HTTPException(status_code=503, detail="Database unavailable.")
     return {"status": "ok"}
 
-
+#POST /analyze
 @app.post("/analyze", response_model=AnalysisRecord)
 async def analyze(
     resume: UploadFile = File(..., description="Resume: PDF, DOCX or TXT"),
     job_description: UploadFile = File(..., description="Job description: PDF, DOCX or TXT"),
 ):
-    # 1. file -> text (bad input becomes a 400 with a readable message)
+    # 1. Convert file -> text (bad input becomes a 400 with a readable message)
     try:
         resume_text = await extract_text_from_upload(resume)
-        jd_text = await extract_text_from_upload(job_description)
+        jd_text = await extract_text_from_upload(job_description)   #extract_text_from_upload comes from extraction.py
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))
 
