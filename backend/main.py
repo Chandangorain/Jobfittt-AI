@@ -51,7 +51,7 @@ async def analyze(
         resume_text = await extract_text_from_upload(resume)
         jd_text = await extract_text_from_upload(job_description)   #extract_text_from_upload comes from extraction.py
     except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc))
+        raise HTTPException(status_code=400, detail=str(exc))   #HTTP 400 Bad Request
 
     # 2. run the LangGraph workflow (blocking LLM calls -> worker thread)
     try:
