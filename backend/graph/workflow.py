@@ -21,7 +21,7 @@ from .nodes import (
 #decision makeing router , whether need improvement or not
 def route_after_scoring(state: GraphState) -> str:
     """Borderline scores get a second, more careful pass; clear cases skip it."""
-    score = state["match_score"]
+    score = state["match_score"] # match_score comes from comapre_and_score node .
     if 40 <= score <= 70:
         return "deep_dive_analysis"
     return "generate_feedback"
